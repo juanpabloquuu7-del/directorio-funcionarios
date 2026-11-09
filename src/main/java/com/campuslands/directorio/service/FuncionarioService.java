@@ -16,7 +16,6 @@ public class FuncionarioService {
         this.repository = repository;
     }
 
-    /** Filtra por nombre (parcial) o departamento (exacto); el nombre tiene prioridad. Vacíos = ausentes. */
     public List<Funcionario> listar(String nombre, String departamento) {
         if (nombre != null && !nombre.isBlank()) {
             return repository.findByNombreContainingIgnoreCase(nombre.trim());

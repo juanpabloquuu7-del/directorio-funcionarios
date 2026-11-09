@@ -32,13 +32,12 @@ function pintar(lista) {
   });
 }
 
-// Llama a la API; devuelve {status, data}. Los errores de red se reportan al usuario.
 async function llamar(url, opciones) {
   try {
     const res = await fetch(url, opciones);
     const texto = res.status === 204 ? '' : await res.text();
     let data = null;
-    try { data = texto ? JSON.parse(texto) : null; } catch { /* sin cuerpo JSON */ }
+    try { data = texto ? JSON.parse(texto) : null; } catch { data = null; }
     return { status: res.status, data };
   } catch {
     mostrar('Error de conexión con el servidor', 'error');
@@ -105,7 +104,7 @@ $('formulario').addEventListener('submit', async (e) => {
 });
 
 async function eliminar(f) {
-  if (!confirm(`¿Eliminar a ${f.nombre}?`)) return; // si cancela, se conserva el registro
+  if (!confirm(`¿Eliminar a ${f.nombre}?`)) return;
   const r = await llamar(`${API}/${f.id}`, { method: 'DELETE' });
   if (!r) return;
   if (r.status === 204) {
