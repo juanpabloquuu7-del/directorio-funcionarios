@@ -2,13 +2,29 @@
 
 Taller Spring Boot (Campus Lands): API REST + página HTML/CSS/JS vanilla. Java 21, Spring Boot, patrón MVC (controller / service / repository / model) y MySQL.
 
-## Ejecutar
+## Ejecutar con MySQL local
 
 1. Tener MySQL en `localhost:3306` (la base `directorio` se crea sola).
-2. Credenciales por defecto `root` sin contraseña; cambiarlas con las variables `DB_URL`, `DB_USER`, `DB_PASSWORD`.
+2. Credenciales por defecto: usuario `root` sin contraseña. Se cambian con las variables `DB_URL`, `DB_USER` y `DB_PASSWORD`.
 3. `./mvnw spring-boot:run` y abrir <http://localhost:8080>.
 
-Pruebas (usan H2 en memoria, no requieren MySQL): `./mvnw test`
+## Ejecutar con MySQL en la nube (TiDB Cloud Serverless, gratis)
+
+1. Crear una cuenta en <https://tidbcloud.com> y un cluster **Starter** compatible con MySQL.
+2. En **Connect** generar la contraseña y copiar Host, Port y User.
+3. Crear `src/main/resources/application-local.properties` (está ignorado por Git, no se sube):
+
+```properties
+spring.datasource.url=jdbc:mysql://HOST:4000/directorio?createDatabaseIfNotExist=true&sslMode=VERIFY_IDENTITY
+spring.datasource.username=USUARIO
+spring.datasource.password=CONTRASEÑA
+```
+
+4. `./mvnw spring-boot:run -Dspring-boot.run.profiles=local`
+
+## Pruebas
+
+`./mvnw test` (usan H2 en memoria, no requieren MySQL).
 
 ## API `/api/v1/funcionarios`
 
