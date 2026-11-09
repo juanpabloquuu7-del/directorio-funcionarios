@@ -51,7 +51,8 @@ async function cargarLista(query = '', aviso = null) {
   if (!r) return;
   if (r.status === 200) {
     pintar(r.data);
-    if (aviso) mostrar(aviso, 'ok');
+    const n = r.data.length;
+    mostrar(aviso || (query ? `Se encontraron ${n} resultado(s)` : `Listado completo: ${n} funcionario(s)`), 'ok');
   } else if (r.status === 204) {
     pintar([]);
     mostrar(query ? 'No se encontraron resultados' : 'El directorio está vacío', 'info');
