@@ -5,7 +5,7 @@ Taller Spring Boot (Campus Lands): API REST + página HTML/CSS/JS vanilla. Java 
 ## Ejecutar
 
 1. Tener MySQL en `localhost:3306` (la base `directorio` se crea sola).
-2. Credenciales por defecto `root`/`root`; cambiarlas con las variables `DB_URL`, `DB_USER`, `DB_PASSWORD`.
+2. Credenciales por defecto `root` sin contraseña; cambiarlas con las variables `DB_URL`, `DB_USER`, `DB_PASSWORD`.
 3. `./mvnw spring-boot:run` y abrir <http://localhost:8080>.
 
 Pruebas (usan H2 en memoria, no requieren MySQL): `./mvnw test`
