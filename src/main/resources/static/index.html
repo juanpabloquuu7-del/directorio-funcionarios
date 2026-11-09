@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Directorio de funcionarios</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main>
+    <h1>Directorio de funcionarios</h1>
+    <div id="mensaje" role="status" hidden></div>
+
+    <section class="card">
+      <h2 id="tituloForm">Registrar funcionario</h2>
+      <form id="formulario">
+        <input type="hidden" id="id">
+        <label>Nombre <input id="nombre" required></label>
+        <label>Cargo <input id="cargo" required></label>
+        <label>Departamento <input id="departamento" required></label>
+        <label>Teléfono (opcional) <input id="telefono"></label>
+        <div class="acciones">
+          <button type="submit" id="guardar">Guardar</button>
+          <button type="button" id="limpiar" class="secundario">Limpiar</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Consultas</h2>
+      <div class="busqueda">
+        <label>ID <input id="buscarId" type="number" min="1"></label>
+        <button type="button" id="btnId">Consultar por ID</button>
+      </div>
+      <div class="busqueda">
+        <label>Nombre <input id="buscarNombre"></label>
+        <button type="button" id="btnNombre">Buscar por nombre</button>
+      </div>
+      <div class="busqueda">
+        <label>Departamento <input id="buscarDepto"></label>
+        <button type="button" id="btnDepto">Filtrar por departamento</button>
+      </div>
+      <button type="button" id="btnTodos" class="secundario">Ver listado completo</button>
+    </section>
+
+    <section class="card">
+      <table>
+        <thead>
+          <tr><th>ID</th><th>Nombre</th><th>Cargo</th><th>Departamento</th><th>Teléfono</th><th>Acciones</th></tr>
+        </thead>
+        <tbody id="tabla"></tbody>
+      </table>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
