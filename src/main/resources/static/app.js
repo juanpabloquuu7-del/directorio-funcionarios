@@ -1,5 +1,6 @@
 const API = '/api/v1/funcionarios';
 const $ = (id) => document.getElementById(id);
+let authorization = '';
 
 function mostrar(texto, tipo) {
   const m = $('mensaje');
@@ -34,7 +35,9 @@ function pintar(lista) {
 
 async function llamar(url, opciones) {
   try {
-    const res = await fetch(url, opciones);
+    const headers = new Headers(opciones?.headers || {});
+    if (authorization) headers.set('Authorization', authorization);
+    const res = await fetch(url, { ...opciones, headers });
     const texto = res.status === 204 ? '' : await res.text();
     let data = null;
     try { data = texto ? JSON.parse(texto) : null; } catch { data = null; }
@@ -137,4 +140,28 @@ $('btnDepto').onclick = () => cargarLista('?departamento=' + encodeURIComponent(
 $('btnTodos').onclick = () => cargarLista();
 $('limpiar').onclick = limpiar;
 
-cargarLista();
+$('formularioAcceso').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const credentials = `${$('usuario').value}:${$('contrasena').value}`;
+  authorization = `Basic ${btoa(unescape(encodeURIComponent(credentials)))}`;
+  const resultado = await llamar(API);
+  if (resultado && (resultado.status === 200 || resultado.status === 204)) {
+    $('acceso').hidden = true;
+    $('contenido').hidden = false;
+    $('contrasena').value = '';
+    await cargarLista();
+  } else {
+    authorization = '';
+    $('contrasena').value = '';
+    mostrar(resultado?.status === 401 ? 'Usuario o contraseña incorrectos' : 'No fue posible validar el acceso', 'error');
+  }
+});
+
+$('cerrarSesion').onclick = () => {
+  authorization = '';
+  $('contenido').hidden = true;
+  $('acceso').hidden = false;
+  $('formularioAcceso').reset();
+  pintar([]);
+  mostrar('Sesión cerrada', 'info');
+};

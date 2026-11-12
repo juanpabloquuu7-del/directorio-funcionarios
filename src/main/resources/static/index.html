@@ -11,6 +11,18 @@
     <h1>Directorio de funcionarios</h1>
     <div id="mensaje" role="status" hidden></div>
 
+    <section id="acceso" class="card" aria-labelledby="tituloAcceso">
+      <h2 id="tituloAcceso">Iniciar sesión</h2>
+      <form id="formularioAcceso">
+        <label>Usuario <input id="usuario" name="username" autocomplete="username" required></label>
+        <label>Contraseña <input id="contrasena" name="password" type="password" autocomplete="current-password" required></label>
+        <button type="submit">Ingresar</button>
+      </form>
+    </section>
+
+    <div id="contenido" hidden>
+      <button type="button" id="cerrarSesion" class="secundario">Cerrar sesión</button>
+
     <section class="card">
       <h2 id="tituloForm">Registrar funcionario</h2>
       <form id="formulario">
@@ -51,6 +63,7 @@
         <tbody id="tabla"></tbody>
       </table>
     </section>
+    </div>
   </main>
   <script src="app.js"></script>
 </body>

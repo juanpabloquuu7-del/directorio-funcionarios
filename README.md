@@ -25,3 +25,7 @@ Taller Spring Boot (Campus Lands): API REST + página HTML/CSS/JS vanilla. Java 
 | Filtrar por departamento | `GET ?departamento=Contabilidad` (exacto, sin mayúsculas) | 200 / 204 |
 
 Si llegan ambos filtros se aplica el de nombre; los vacíos se ignoran.
+
+## Acceso
+
+La API usa HTTP Basic. Configura APP_USER y APP_PASSWORD en el entorno antes de iniciar la aplicación; no hay credenciales predeterminadas. La interfaz solicita esos datos y conserva la autorización solo mientras la página está abierta. En despliegues fuera de desarrollo local, usa HTTPS para proteger las credenciales en tránsito.
